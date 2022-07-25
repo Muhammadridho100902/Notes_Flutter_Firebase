@@ -9,3 +9,15 @@ class UserModel {
     this.email,
   });
 }
+
+class UserNote {
+  final String? title;
+  final String? note;
+  final String? date;
+
+  UserNote({
+    this.title,
+    this.note,
+    this.date,
+  });
+}

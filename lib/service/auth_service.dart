@@ -69,7 +69,6 @@ class AuthService {
   Future signout() async{
     try {
       return await _auth.signOut();
-      print("Log Out Successful");
     } catch (e) {
       // ignore: avoid_print
       print(e.toString());
