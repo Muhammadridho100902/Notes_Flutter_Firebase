@@ -13,6 +13,8 @@ class UpdatePage extends StatefulWidget {
   // final String titleValue, noteValue;
   // final UserModel NotesValue;
 
+  // final UserModel user;
+
   const UpdatePage({Key? key}) : super(key: key);
 
   @override
@@ -124,12 +126,12 @@ class _UpdatePageState extends State<UpdatePage> {
                   "date_": starttime.toString()
                 },
               ).asStream();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => SeeNotes(),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (_) => SeeNotes(user: User,),
+              //   ),
+              // );
             },
             child: Container(
               width: 250,

@@ -2,18 +2,22 @@
 
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_3/Routes/route.dart';
+import 'package:project_3/model/usermodel.dart';
 import 'package:project_3/service/auth_service.dart';
 import 'package:project_3/view/addnote.dart';
 import 'package:project_3/view/updatePage.dart';
 
 class SeeNotes extends StatefulWidget {
-  const SeeNotes({Key? key}) : super(key: key);
+  final UserModel ?user;
+  const SeeNotes({Key? key, this.user}) : super(key: key);
+  // const SeeNotes({Key? key}) : super(key: key);
 
   @override
   State<SeeNotes> createState() => _SeeNotesState();
@@ -39,22 +43,11 @@ class _SeeNotesState extends State<SeeNotes> {
 
   var o;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   title = widget.k
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // var rng = Random();
-    // var o = rng.nextInt(10000);
-    // final ref = fb.ref().child('todos/$k');
-
-    // final databaseRef = FirebaseDatabase.instance.ref().child("todos");
-
-    final ref = fb.ref().child('todos');
+    // final ref = fb.ref().child('todos');
+    // final ref = fb.ref().child('users/zyCJ0fmy8xhVy8ZlIv0hofD9th92/notes');
+    final ref = fb.ref().child('users/${widget.user?.userId}/notes');
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -66,15 +59,29 @@ class _SeeNotesState extends State<SeeNotes> {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 70, right: 20),
-                  child: Text(
-                    "Hi, Welcome",
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 70, right: 20),
+                      child: Text(
+                        "Hi, Welcome",
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 70, right: 20),
+                    //   child: Text(
+                    //     "${widget.user.userId}",
+                    //     style: TextStyle(
+                    //         fontSize: 30,
+                    //         color: Colors.black,
+                    //         fontWeight: FontWeight.bold),
+                    //   ),
+                    // ),
+                  ],
                 ),
                 // ElevatedButton(onPressed: (){}, child: Text("Log Out"))
                 Padding(
@@ -260,8 +267,8 @@ class _SeeNotesState extends State<SeeNotes> {
                               tileColor: Color.fromARGB(255, 192, 192, 192),
                               trailing: IconButton(
                                 onPressed: () {
-                                  // ref.child(snapshot.key!).remove();
-                                  Delete();
+                                  ref.child(snapshot.key!).remove();
+                                  // Delete();
                                 },
                                 icon: Padding(
                                   padding: const EdgeInsets.only(top: 8),

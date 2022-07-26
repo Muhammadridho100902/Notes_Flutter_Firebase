@@ -5,11 +5,13 @@ import 'dart:math';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_3/model/usermodel.dart';
+import 'package:project_3/service/auth_service.dart';
 import 'package:project_3/view/seenote.dart';
-// import 'package:intl/intl.dart';
 
 class Notes extends StatefulWidget {
-  const Notes({Key? key}) : super(key: key);
+  final UserModel ?user;
+  const Notes({Key? key, this.user}) : super(key: key);
 
   @override
   State<Notes> createState() => _NotesState();
@@ -22,12 +24,39 @@ class _NotesState extends State<Notes> {
   TextEditingController notes = TextEditingController();
 
   final fb = FirebaseDatabase.instance;
+  final AuthService _authService = AuthService();
+
+  // UserModel? _userFromFirebase(User user) {
+  //   return UserModel(userId: user.uid, name: user.displayName,email: user.email,);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // final user = UserModel();
+
     var rng = Random();
     var k = rng.nextInt(10000);
-    final ref = fb.ref().child('todos/$k');
+    final ref = fb.ref().child('users/${widget.user?.userId}/notes/$k');
+    // final ref = fb.ref().child('users/$UserModel.userId/notes/$k');
+
+    // void addNote() {
+    //   ref.set(
+    //     {
+    //       "userId_": k.toString(),
+    //       "title_": title.text,
+    //       "notes_": notes.text,
+    //       "date_": starttime.toString()
+    //     },
+    //   ).asStream();
+    //   if (user != null) {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) => SeeNotes(user: user),
+    //       ),
+    //     );
+    //   }
+    // }
 
     return Scaffold(
       body: Column(
@@ -62,9 +91,7 @@ class _NotesState extends State<Notes> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                    width: 2,
-                    color: Colors.grey,
-                    style: BorderStyle.solid)),
+                    width: 2, color: Colors.grey, style: BorderStyle.solid)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -103,12 +130,12 @@ class _NotesState extends State<Notes> {
               ],
             ),
           ),
-         
           SizedBox(
             height: 20,
           ),
           GestureDetector(
             onTap: () {
+              // addNote();
               ref.set(
                 {
                   "userId_": k.toString(),
@@ -120,7 +147,8 @@ class _NotesState extends State<Notes> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => SeeNotes(),
+                  builder: (context) => SeeNotes(),
+                  // builder: (_) => Center(child: Text("berhasil add"),)
                 ),
               );
             },

@@ -33,9 +33,9 @@ class Onboarding extends StatelessWidget {
           fontWeight: FontWeight.w600,
         ),
       ),
-      trailingFunction: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> SeeNotes()));
-      },
+      // trailingFunction: () {
+      //   Navigator.push(context, MaterialPageRoute(builder: (_)=> SeeNotes()));
+      // },
       controllerColor: kDarkBlueColor,
       totalPage: 3,
       headerBackgroundColor: Colors.white,

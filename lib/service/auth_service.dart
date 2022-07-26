@@ -30,6 +30,8 @@ class AuthService {
   //     return null;
   //   }
   // }
+
+
   // SIGN UP WITH EMAIL AND PASSWORD
 
   Future signUpWithEmailPassword({required String email, required String name, required String password}) async{
@@ -48,8 +50,6 @@ class AuthService {
 
 
   //sign in  with email and password
-
-
   Future signinUsingEmailPassword(String email, String pass) async{
 
     try {
