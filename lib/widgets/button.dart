@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_string_interpolations, prefer_const_constructors, unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_string_interpolations, prefer_const_constructors, unnecessary_brace_in_string_interps, camel_case_types
 
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
+// ignore_for_file: prefer_const_constructors, must_be_immutable, camel_case_types, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:project_3/widgets/userlabel.dart';

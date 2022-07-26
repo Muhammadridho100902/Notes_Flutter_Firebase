@@ -10,6 +10,7 @@ class AuthService {
   UserModel? _userFromFirebase(User user) {
     return UserModel(userId: user.uid, name: user.displayName,email: user.email,);
   }
+  
 
   //auth changes user stream
 
@@ -30,7 +31,6 @@ class AuthService {
   //     return null;
   //   }
   // }
-
 
   // SIGN UP WITH EMAIL AND PASSWORD
 

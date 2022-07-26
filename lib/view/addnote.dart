@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_field
 
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -10,8 +11,8 @@ import 'package:project_3/service/auth_service.dart';
 import 'package:project_3/view/seenote.dart';
 
 class Notes extends StatefulWidget {
-  final UserModel ?user;
-  const Notes({Key? key, this.user}) : super(key: key);
+  // final UserModel user;
+  const Notes({Key? key}) : super(key: key);
 
   @override
   State<Notes> createState() => _NotesState();
@@ -26,37 +27,19 @@ class _NotesState extends State<Notes> {
   final fb = FirebaseDatabase.instance;
   final AuthService _authService = AuthService();
 
-  // UserModel? _userFromFirebase(User user) {
-  //   return UserModel(userId: user.uid, name: user.displayName,email: user.email,);
-  // }
+    UserModel? _userFromFirebase(User user) {
+    return UserModel(userId: user.uid, name: user.displayName,email: user.email,);
+  }
 
   @override
   Widget build(BuildContext context) {
     // final user = UserModel();
+    final myUserId = FirebaseAuth.instance.currentUser?.uid;
 
     var rng = Random();
     var k = rng.nextInt(10000);
-    final ref = fb.ref().child('users/${widget.user?.userId}/notes/$k');
-    // final ref = fb.ref().child('users/$UserModel.userId/notes/$k');
-
-    // void addNote() {
-    //   ref.set(
-    //     {
-    //       "userId_": k.toString(),
-    //       "title_": title.text,
-    //       "notes_": notes.text,
-    //       "date_": starttime.toString()
-    //     },
-    //   ).asStream();
-    //   if (user != null) {
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => SeeNotes(user: user),
-    //       ),
-    //     );
-    //   }
-    // }
+    final ref = fb.ref().child('users/$myUserId/notes/$k');
+    // final ref = fb.ref().child('users/${widget.user.userId}/notes/$k');
 
     return Scaffold(
       body: Column(
@@ -148,7 +131,6 @@ class _NotesState extends State<Notes> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => SeeNotes(),
-                  // builder: (_) => Center(child: Text("berhasil add"),)
                 ),
               );
             },

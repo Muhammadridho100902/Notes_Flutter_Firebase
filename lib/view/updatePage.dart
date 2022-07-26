@@ -1,13 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, file_names
 
 import 'dart:math';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_3/model/usermodel.dart';
-import 'package:project_3/view/seenote.dart';
 
 class UpdatePage extends StatefulWidget {
   // final String titleValue, noteValue;
@@ -28,13 +25,6 @@ class _UpdatePageState extends State<UpdatePage> {
   TextEditingController notes = TextEditingController();
 
   final fb = FirebaseDatabase.instance;
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   title =
-  // }
 
   @override
   Widget build(BuildContext context) {

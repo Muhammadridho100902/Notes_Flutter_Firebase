@@ -1,22 +1,18 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
-import 'dart:math';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, prefer_typing_uninitialized_variables, non_constant_identifier_names
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
-import 'package:project_3/Routes/route.dart';
 import 'package:project_3/model/usermodel.dart';
 import 'package:project_3/service/auth_service.dart';
 import 'package:project_3/view/addnote.dart';
 import 'package:project_3/view/updatePage.dart';
 
 class SeeNotes extends StatefulWidget {
-  final UserModel ?user;
-  const SeeNotes({Key? key, this.user}) : super(key: key);
+  // final UserModel user;
+  const SeeNotes({Key? key}) : super(key: key);
   // const SeeNotes({Key? key}) : super(key: key);
 
   @override
@@ -25,6 +21,21 @@ class SeeNotes extends StatefulWidget {
 
 class _SeeNotesState extends State<SeeNotes> {
   final AuthService _authService = AuthService();
+
+  //create user obj from firebase user
+
+  UserModel? _userFromFirebase(User user) {
+    return UserModel(userId: user.uid, name: user.displayName,email: user.email,);
+  }
+  
+
+  //auth changes user stream
+
+  // Stream<UserModel?> get user {
+  //   return _authService
+  //       .authStateChanges()
+  //       .map((User? user) => _userFromFirebase(user!));
+  // }
 
   final fb = FirebaseDatabase.instance;
 
@@ -45,9 +56,10 @@ class _SeeNotesState extends State<SeeNotes> {
 
   @override
   Widget build(BuildContext context) {
+    final myUserid = FirebaseAuth.instance.currentUser?.uid;
     // final ref = fb.ref().child('todos');
-    // final ref = fb.ref().child('users/zyCJ0fmy8xhVy8ZlIv0hofD9th92/notes');
-    final ref = fb.ref().child('users/${widget.user?.userId}/notes');
+    // final ref = fb.ref().child('users/KxmpNFh5bQUbcXD4U8VTgbXPvSg2/notes');
+    final ref = fb.ref().child('users/$myUserid/notes');
 
     return Scaffold(
       body: SingleChildScrollView(

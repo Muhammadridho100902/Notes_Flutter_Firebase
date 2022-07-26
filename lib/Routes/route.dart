@@ -1,11 +1,8 @@
 // import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:project_3/model/usermodel.dart';
 import 'package:project_3/view/home.dart';
 import 'package:project_3/view/onboarding.dart';
-import 'package:project_3/view/seenote.dart';
-import 'package:provider/provider.dart';
 
 const String onboarding = 'onboarding';
 const String home = 'home';
@@ -20,10 +17,10 @@ Route<dynamic> controller(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => Onboarding(),
       );
-    case home:
-      return MaterialPageRoute(
-        builder: (context) => const Home(),
-      );
+    // case home:
+    //   return MaterialPageRoute(
+    //     builder: (context) => const Home(),
+    //   );
     // case note:
     //   BuildContext context;
     //   // var user = Provider.of<UserModel>bul;

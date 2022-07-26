@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
 import 'package:project_3/service/auth_service.dart';

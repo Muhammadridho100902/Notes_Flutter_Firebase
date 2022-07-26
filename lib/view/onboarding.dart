@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:project_3/Routes/route.dart';
-import 'package:project_3/view/seenote.dart';
 
 class Onboarding extends StatelessWidget {
   final Color kDarkBlueColor = Color(0xFF053149);
