@@ -1,7 +1,6 @@
 // import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:project_3/view/home.dart';
 import 'package:project_3/view/onboarding.dart';
 
 const String onboarding = 'onboarding';
