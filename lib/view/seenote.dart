@@ -171,119 +171,121 @@ class _SeeNotesState extends State<SeeNotes> {
                             k = snapshot.key;
                           });
 
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => UpdatePage()
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UpdatePage(
+                                      titleValue: '${notes[1]}',
+                                      notesValue: '${notes[2]}',
+                                    )),
+                          );
 
                           // print("Title: ${notes[1]} ||Note: ${notes[2]}",);
 
-                          showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Column(
-                                children: [
-                                  Container(
-                                    width: 500,
-                                    decoration:
-                                        BoxDecoration(border: Border.all()),
-                                    child: TextField(
-                                      controller: title,
-                                      textAlign: TextAlign.center,
-                                      decoration:
-                                          InputDecoration(hintText: "Title"),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                    width: 500,
-                                    height: 100,
-                                    decoration:
-                                        BoxDecoration(border: Border.all()),
-                                    child: TextField(
-                                      maxLengthEnforcement:
-                                          MaxLengthEnforcement.enforced,
-                                      maxLines: 20,
-                                      controller: notesV,
-                                      textAlign: TextAlign.center,
-                                      decoration:
-                                          InputDecoration(hintText: "Notes"),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              content: Container(
-                                width: MediaQuery.of(context).size.width / 2,
-                                height: 160,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                        width: 2,
-                                        color: Colors.grey,
-                                        style: BorderStyle.solid)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("Start Date"),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      starttime,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          25, 5, 25, 0),
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          _myStartDate = (await showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),
-                                            firstDate: DateTime(2015),
-                                            lastDate: DateTime(2025),
-                                          ))!;
-                                          setState(() {
-                                            starttime = DateFormat('dd-MM-yyyy')
-                                                .format(_myStartDate);
-                                          });
-                                        },
-                                        child: Text("Choose the date"),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              actions: <Widget>[
-                                MaterialButton(
-                                  onPressed: () {
-                                    cancel();
-                                  },
-                                  color: Colors.red,
-                                  child: Text("Cancel"),
-                                ),
-                                MaterialButton(
-                                  onPressed: () async {
-                                    await upd();
-                                    Navigator.of(ctx).pop();
-                                  },
-                                  color: Colors.red,
-                                  child: Text("Update"),
-                                )
-                              ],
-                            ),
-                          );
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (ctx) => AlertDialog(
+                          //     title: Column(
+                          //       children: [
+                          //         Container(
+                          //           width: 500,
+                          //           decoration:
+                          //               BoxDecoration(border: Border.all()),
+                          //           child: TextField(
+                          //             controller: title,
+                          //             textAlign: TextAlign.center,
+                          //             decoration:
+                          //                 InputDecoration(hintText: "Title"),
+                          //           ),
+                          //         ),
+                          //         SizedBox(
+                          //           height: 10,
+                          //         ),
+                          //         Container(
+                          //           width: 500,
+                          //           height: 100,
+                          //           decoration:
+                          //               BoxDecoration(border: Border.all()),
+                          //           child: TextField(
+                          //             maxLengthEnforcement:
+                          //                 MaxLengthEnforcement.enforced,
+                          //             maxLines: 20,
+                          //             controller: notesV,
+                          //             textAlign: TextAlign.center,
+                          //             decoration:
+                          //                 InputDecoration(hintText: "Notes"),
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     content: Container(
+                          //       width: MediaQuery.of(context).size.width / 2,
+                          //       height: 160,
+                          //       decoration: BoxDecoration(
+                          //           color: Colors.white,
+                          //           borderRadius: BorderRadius.circular(20),
+                          //           border: Border.all(
+                          //               width: 2,
+                          //               color: Colors.grey,
+                          //               style: BorderStyle.solid)),
+                          //       child: Column(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           Text("Start Date"),
+                          //           SizedBox(
+                          //             height: 10,
+                          //           ),
+                          //           Text(
+                          //             starttime,
+                          //             style: TextStyle(
+                          //               color: Colors.black,
+                          //               fontSize: 24,
+                          //             ),
+                          //           ),
+                          //           SizedBox(
+                          //             height: 10,
+                          //           ),
+                          //           Padding(
+                          //             padding: const EdgeInsets.fromLTRB(
+                          //                 25, 5, 25, 0),
+                          //             child: ElevatedButton(
+                          //               onPressed: () async {
+                          //                 _myStartDate = (await showDatePicker(
+                          //                   context: context,
+                          //                   initialDate: DateTime.now(),
+                          //                   firstDate: DateTime(2015),
+                          //                   lastDate: DateTime(2025),
+                          //                 ))!;
+                          //                 setState(() {
+                          //                   starttime = DateFormat('dd-MM-yyyy')
+                          //                       .format(_myStartDate);
+                          //                 });
+                          //               },
+                          //               child: Text("Choose the date"),
+                          //             ),
+                          //           )
+                          //         ],
+                          //       ),
+                          //     ),
+                          //     actions: <Widget>[
+                          //       MaterialButton(
+                          //         onPressed: () {
+                          //           cancel();
+                          //         },
+                          //         color: Colors.red,
+                          //         child: Text("Cancel"),
+                          //       ),
+                          //       MaterialButton(
+                          //         onPressed: () async {
+                          //           await upd();
+                          //           Navigator.of(ctx).pop();
+                          //         },
+                          //         color: Colors.red,
+                          //         child: Text("Update"),
+                          //       )
+                          //     ],
+                          //   ),
+                          // );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(20),
@@ -411,5 +413,6 @@ class _SeeNotesState extends State<SeeNotes> {
 
     title.clear();
     notes.clear();
+    starttime = '';
   }
 }

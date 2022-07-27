@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names, prefer_typing_uninitialized_variables, unused_local_variable, await_only_futures
+// ignore_for_file: prefer_const_constructors, file_names, prefer_typing_uninitialized_variables, unused_local_variable, await_only_futures, no_logic_in_create_state
 
 import 'dart:math';
 
@@ -11,12 +11,15 @@ import 'package:project_3/service/auth_service.dart';
 import 'package:project_3/view/seenote.dart';
 
 class UpdatePage extends StatefulWidget {
-  // final String titleValue, notesValue;
+  final String titleValue, notesValue;
 
-  const UpdatePage({Key? key}) : super(key: key);
+
+  const UpdatePage({Key? key, required this.titleValue, required this.notesValue}) : super(key: key);
 
   @override
-  State<UpdatePage> createState() => _UpdatePageState();
+  State<UpdatePage> createState() {
+    return _UpdatePageState(titleValue, notesValue);
+  }
 }
 
 class _UpdatePageState extends State<UpdatePage> {
@@ -44,6 +47,9 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
+  final String titleValue, notesValue;
+  _UpdatePageState(this.titleValue, this.notesValue);
+
   @override
   Widget build(BuildContext context) {
     final myUserId = FirebaseAuth.instance.currentUser?.uid;
@@ -63,7 +69,7 @@ class _UpdatePageState extends State<UpdatePage> {
               child: TextField(
                 controller: title,
                 decoration: InputDecoration(
-                    hintText: "Title",
+                    hintText: titleValue ,
                     // labelText: "Title",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
@@ -79,7 +85,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   // maxLength: 100,
                   decoration: InputDecoration(
                       // labelText: "Notes",
-                      hintText: "Notes",
+                      hintText: notesValue,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20))),
                 ),
@@ -142,7 +148,8 @@ class _UpdatePageState extends State<UpdatePage> {
             GestureDetector(
               onTap: () async {
                 // final ref = fb.ref().child('todos/$k');
-                DatabaseReference refUpd = FirebaseDatabase.instance.ref("todos/$k");
+                DatabaseReference refUpd =
+                    FirebaseDatabase.instance.ref("todos/$k");
 
                 // only update the name
                 await refUpd.update(
