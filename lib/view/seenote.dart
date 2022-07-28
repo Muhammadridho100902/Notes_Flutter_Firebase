@@ -5,6 +5,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:project_3/service/auth_service.dart';
+import 'package:project_3/view/LoginPage.dart';
+import 'package:project_3/view/SignupPage.dart';
 import 'package:project_3/view/addnote.dart';
 import 'package:project_3/view/updatePage.dart';
 import '../view/updatePage.dart';
@@ -41,6 +43,12 @@ class _SeeNotesState extends State<SeeNotes> {
   var k;
 
   var o;
+
+  bool showSignIn = true;
+  void toggleView() {
+    //print(showSignIn.toString());
+    setState(() => showSignIn = !showSignIn);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +116,9 @@ class _SeeNotesState extends State<SeeNotes> {
                                   MaterialButton(
                                     onPressed: () async {
                                       await _authService.signout();
-                                      Navigator.of(ctx).pop();
+                                      Navigator.of(ctx).push(MaterialPageRoute(
+                                          builder: (_) => LoginPage(
+                                              toggleView: toggleView)));
                                     },
                                     color: Colors.red,
                                     textColor: Colors.white,
