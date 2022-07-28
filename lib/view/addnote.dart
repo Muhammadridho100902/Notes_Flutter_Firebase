@@ -2,17 +2,13 @@
 
 import 'dart:math';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:project_3/model/usermodel.dart';
 import 'package:project_3/service/auth_service.dart';
 import 'package:project_3/view/seenote.dart';
 
 class Notes extends StatefulWidget {
-  // final UserModel user;
   const Notes({Key? key}) : super(key: key);
 
   @override
@@ -28,18 +24,10 @@ class _NotesState extends State<Notes> {
   final fb = FirebaseDatabase.instance;
   final AuthService _authService = AuthService();
 
-  UserModel? _userFromFirebase(User user) {
-    return UserModel(
-      userId: user.uid,
-      name: user.displayName,
-      email: user.email,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    // final user = UserModel();
-    final myUserId = FirebaseAuth.instance.currentUser?.uid;
+    // final myUserId = FirebaseAuth.instance.currentUser?.uid;
 
     var rng = Random();
     var k = rng.nextInt(10000);

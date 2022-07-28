@@ -4,20 +4,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:project_3/service/auth_service.dart';
 import 'package:project_3/view/addnote.dart';
 import 'package:project_3/view/updatePage.dart';
 import '../view/updatePage.dart';
 
 class SeeNotes extends StatefulWidget {
-  // final UserModel? user;
+  // final String titleValue, notesValue;
   const SeeNotes({Key? key}) : super(key: key);
-  // const SeeNotes({Key? key}) : super(key: key);
+  // const SeeNotes({Key? key, required this.titleValue, required this.notesValue})
+  //     : super(key: key);
 
   @override
   State<SeeNotes> createState() => _SeeNotesState();
+
+  // @override
+  // State<SeeNotes> createState() {
+  //   return _SeeNotesState(titleValue, notesValue);
+  // }
 }
 
 class _SeeNotesState extends State<SeeNotes> {
@@ -27,8 +31,6 @@ class _SeeNotesState extends State<SeeNotes> {
 
   late DateTime _myStartDate;
   String starttime = '';
-  late DateTime _myEndDate;
-  String endtime = '';
   TextEditingController title = TextEditingController();
   TextEditingController notesV = TextEditingController();
 
@@ -121,35 +123,6 @@ class _SeeNotesState extends State<SeeNotes> {
                       ),
                     ],
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 20),
-                  //   child: GestureDetector(
-                  //     onTap: () async {
-                  //       await _authService.signout();
-                  //     },
-                  //     child: Container(
-                  //       width: 70,
-                  //       height: 30,
-                  //       decoration: BoxDecoration(
-                  //           color: Color.fromARGB(255, 255, 255, 255),
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //                 color: Colors.grey.shade200,
-                  //                 blurRadius: 2,
-                  //                 offset: Offset(2, 2),
-                  //                 spreadRadius: 5)
-                  //           ],
-                  //           borderRadius: BorderRadius.circular(15)),
-                  //       child: Center(
-                  //         child: Text(
-                  //           "Log Out",
-                  //           style: TextStyle(
-                  //               fontSize: 16, fontWeight: FontWeight.bold),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
             ),
@@ -171,121 +144,19 @@ class _SeeNotesState extends State<SeeNotes> {
                             k = snapshot.key;
                           });
 
+                          // print('${notes[1]}');
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UpdatePage(
-                                      titleValue: '${notes[1]}',
-                                      notesValue: '${notes[2]}',
-                                    )),
+                              builder: (context) => UpdatePage(
+                                idValue: k.toString(),
+                                titleValue: '${notes[1]}',
+                                notesValue: '${notes[2]}',
+                                dateValue: '${notes[3]}',
+                              ),
+                            ),
                           );
-
-                          // print("Title: ${notes[1]} ||Note: ${notes[2]}",);
-
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (ctx) => AlertDialog(
-                          //     title: Column(
-                          //       children: [
-                          //         Container(
-                          //           width: 500,
-                          //           decoration:
-                          //               BoxDecoration(border: Border.all()),
-                          //           child: TextField(
-                          //             controller: title,
-                          //             textAlign: TextAlign.center,
-                          //             decoration:
-                          //                 InputDecoration(hintText: "Title"),
-                          //           ),
-                          //         ),
-                          //         SizedBox(
-                          //           height: 10,
-                          //         ),
-                          //         Container(
-                          //           width: 500,
-                          //           height: 100,
-                          //           decoration:
-                          //               BoxDecoration(border: Border.all()),
-                          //           child: TextField(
-                          //             maxLengthEnforcement:
-                          //                 MaxLengthEnforcement.enforced,
-                          //             maxLines: 20,
-                          //             controller: notesV,
-                          //             textAlign: TextAlign.center,
-                          //             decoration:
-                          //                 InputDecoration(hintText: "Notes"),
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //     content: Container(
-                          //       width: MediaQuery.of(context).size.width / 2,
-                          //       height: 160,
-                          //       decoration: BoxDecoration(
-                          //           color: Colors.white,
-                          //           borderRadius: BorderRadius.circular(20),
-                          //           border: Border.all(
-                          //               width: 2,
-                          //               color: Colors.grey,
-                          //               style: BorderStyle.solid)),
-                          //       child: Column(
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-                          //         children: [
-                          //           Text("Start Date"),
-                          //           SizedBox(
-                          //             height: 10,
-                          //           ),
-                          //           Text(
-                          //             starttime,
-                          //             style: TextStyle(
-                          //               color: Colors.black,
-                          //               fontSize: 24,
-                          //             ),
-                          //           ),
-                          //           SizedBox(
-                          //             height: 10,
-                          //           ),
-                          //           Padding(
-                          //             padding: const EdgeInsets.fromLTRB(
-                          //                 25, 5, 25, 0),
-                          //             child: ElevatedButton(
-                          //               onPressed: () async {
-                          //                 _myStartDate = (await showDatePicker(
-                          //                   context: context,
-                          //                   initialDate: DateTime.now(),
-                          //                   firstDate: DateTime(2015),
-                          //                   lastDate: DateTime(2025),
-                          //                 ))!;
-                          //                 setState(() {
-                          //                   starttime = DateFormat('dd-MM-yyyy')
-                          //                       .format(_myStartDate);
-                          //                 });
-                          //               },
-                          //               child: Text("Choose the date"),
-                          //             ),
-                          //           )
-                          //         ],
-                          //       ),
-                          //     ),
-                          //     actions: <Widget>[
-                          //       MaterialButton(
-                          //         onPressed: () {
-                          //           cancel();
-                          //         },
-                          //         color: Colors.red,
-                          //         child: Text("Cancel"),
-                          //       ),
-                          //       MaterialButton(
-                          //         onPressed: () async {
-                          //           await upd();
-                          //           Navigator.of(ctx).pop();
-                          //         },
-                          //         color: Colors.red,
-                          //         child: Text("Update"),
-                          //       )
-                          //     ],
-                          //   ),
-                          // );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(20),
@@ -302,21 +173,8 @@ class _SeeNotesState extends State<SeeNotes> {
                                     Color(0xFFFFFFFF).withOpacity(0.2),
                                   ],
                                 ),
-                                // color: Colors.blue,
-                                // boxShadow: [
-                                //   BoxShadow(
-                                //       offset: Offset(2, 2),
-                                //       blurRadius: 5,
-                                //       color: Colors.grey,
-                                //       spreadRadius: 3)
-                                // ],
                                 borderRadius: BorderRadius.circular(20)),
                             child: ListTile(
-                              // shape: RoundedRectangleBorder(
-                              //   side: BorderSide(color: Colors.white),
-                              //   borderRadius: BorderRadius.circular(15),
-                              // ),
-                              // tileColor: Color.fromARGB(255, 192, 192, 192),
                               trailing: IconButton(
                                 onPressed: () {
                                   ref.child(snapshot.key!).remove();
@@ -369,19 +227,6 @@ class _SeeNotesState extends State<SeeNotes> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.add),
-      //   onPressed: () {
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(
-      //         builder: (_) => Notes(),
-      //       ),
-      //     );
-      //   },
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 
@@ -393,16 +238,8 @@ class _SeeNotesState extends State<SeeNotes> {
     starttime = "";
   }
 
-  // Delete() {
-  //   DatabaseReference ref = FirebaseDatabase.instance.ref('todos/$k');
-
-  //   ref.remove();
-  // }
-
   upd() async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("todos/$k");
-
-    // only update the name
     await ref.update(
       {
         "title_": title.text,
@@ -412,7 +249,7 @@ class _SeeNotesState extends State<SeeNotes> {
     );
 
     title.clear();
-    notes.clear();
-    starttime = '';
+    notesV.clear();
+    // starttime = '';
   }
 }
